@@ -1,14 +1,13 @@
 import requests
+import os
 
-API_URL = "https://api-inference.huggingface.co/models/google/gemma-3-4b-it"
+hf_token = os.getenv("hf_prompt_engineering")
 
-headers = {"Authorization": "Bearer "}
-
+API_URL = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment-latest"
+headers = {"Authorization": f"Bearer {hf_token}"}
 payload = {
-    "inputs": "Summarize the following: Today is a great day, I like the sun on my face. I wish there was a pool nearby. the mosquitos are starting to reall bother me. maybe I should look for som kind of bug spray. tommowrow might be rough i have a lot of work to do.",
+    "inputs": "Today is a great day",
 }
 
 response = requests.post(API_URL, headers=headers, json=payload)
-
-print(response.status_code)
 print(response.json())
